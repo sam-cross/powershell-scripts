@@ -8,6 +8,7 @@ Sam's PowerShell script collection resides in this directory.
 Removes a device from Active Directory and SCCM in preparation for imaging. Accepts an asset tag (without trailing X) as an argument or prompts for one when running.
 
 > EG (providing asset tag in launch command): `> ./Remove-Device-For-Imaging.ps1 1023456`
+
 > EG (providing asset tag while script runs): `> ./Remove-Device-For-Imaging.ps1`
 
 ## Launch-Admin-Apps
