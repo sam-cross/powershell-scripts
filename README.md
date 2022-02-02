@@ -5,7 +5,9 @@ Sam's PowerShell script collection resides in this directory.
 ----
 
 ## Remove-Device-For-Imaging
-Removes a device from Active Directory and SCCM in preparation for imaging. Accepts an asset tag (without trailing X) as an argument or prompts for one when running.
+Removes a device from Active Directory and SCCM in preparation for imaging. Accepts a machine name as an argument or prompts for one when running.
+
+Where names end with a specific character (eg: X), this will be automatically appended. Change the character in the PS1 file.
 
 > EG (providing asset tag in launch command): `> ./Remove-Device-For-Imaging.ps1 1023456`
 
