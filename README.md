@@ -9,9 +9,9 @@ Removes a device from Active Directory and SCCM in preparation for imaging. Acce
 
 Where names end with a specific character (eg: X), this will be automatically appended. Change the character in the PS1 file.
 
-> EG (providing asset tag in launch command): `> ./Remove-Device-For-Imaging.ps1 1023456`
+> EG (providing machine name in launch command): `> ./Remove-Device-For-Imaging.ps1 1023456`
 
-> EG (providing asset tag while script runs): `> ./Remove-Device-For-Imaging.ps1`
+> EG (providing machine name while script runs): `> ./Remove-Device-For-Imaging.ps1`
 
 ## Launch-Admin-Apps
 Launches SCCM, Active Directory Users and Computers management, and a helpful admin PowerShell window. No arguments required. Run as normal and the script will open a UAC prompt for admin credentials, or run as administrator.
