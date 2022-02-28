@@ -19,6 +19,6 @@ Launches SCCM, Active Directory Users and Computers management, and a helpful ad
 > EG: `> ./Launch-Admin-Apps.ps1`
 
 ## Join-Sites
-Run in an administrator PowerShell session to programmatically join the Council's Active Directory and SCCM sites, for administration. No arguments required, but this script MUST be launched from inside an elevated PowerShell session.
+Run in an administrator PowerShell session to programmatically join both Active Directory and SCCM sites for administration. No arguments required, but this script MUST be launched from inside an elevated PowerShell session.
 
 > EG: `> ./Join-Sites.ps1`
