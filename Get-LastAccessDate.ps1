@@ -2,27 +2,39 @@ param (
     [Parameter(Mandatory=$true)]
         [string]$Path,
     [Parameter(Mandatory=$true)]
-        [string]$CsvExportPath
+        [string]$CsvDir
 )
 
+$DateNow = Get-Date
+$Path = (Resolve-Path $Path).Path
+$PathSplit = $Path.Split('\')
+$CsvName = ("Export-{0}-{1}.csv" -f $PathSplit[1], $PathSplit[2])
 $Children = (Get-ChildItem -Path $Path -Recurse | Select-Object -Property LastAccessTime,LastWriteTime,FullName,PSIsContainer)
 
 $(Foreach ($Child in $Children) {
     $SplitName = $Child.FullName.Split('\')
 
-    [ordered]$ExportTable = @{
-        "LastAccessTime" = $Child.LastAccessTime;
+    $ExportTable = [ordered]@{
+        "6MonthWrite" = $false;
+        "6MonthAccess" = $false;
         "LastWriteTime" = $Child.LastWriteTime;
-        "FullName" = $Child.FullName;
+        "LastAccessTime" = $Child.LastAccessTime;
         "IsDirectory" = $Child.PSIsContainer;
+        "FullName" = $Child.FullName;
+    }
+
+    # Check last 6 months
+    If ($Child.LastAccessTime -gt $DateNow.AddMonths(-6)) {
+        $ExportTable["6MonthAccess"] = $true;
+    }
+    If ($Child.LastWriteTime -gt $DateNow.AddMonths(-6)) {
+        $ExportTable["6MonthWrite"] = $true;
     }
 
     # Add each name portion as a new column
-    $NDir = 0
-    Foreach ($NamePortion in $SplitName) {
-        $ExportTable.Add("Path-$NDir", $NamePortion)
-        $NDir += 1;
+    For ($p = 0; $p -lt $SplitName.Length + 1; $p++) {
+        $ExportTable.Add("Path$p", $SplitName[$p])
     }
 
     New-Object psobject -Property $ExportTable
-}) | Export-Csv -Path $CsvExportPath
+}) | Export-Csv -Path "${CsvDir}\${CsvName}" -NoTypeInformation
